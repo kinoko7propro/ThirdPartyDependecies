@@ -5,7 +5,6 @@ import os
 import sys
 import pkgutil
 
-# 获取标准库模块名集合
 def get_stdlib_modules():
     stdlib_paths = [p for p in sys.path if 'site-packages' not in p]
     stdlib_modules = set()
@@ -29,8 +28,7 @@ def extract_imports(file_path):
             if node.module is not None:
                 imports.add(node.module.split('.')[0])
     return imports
-
-# 主程序逻辑
+    
 def analyze_file():
     file_path = filedialog.askopenfilename(filetypes=[("Python Files", "*.py")])
     if not file_path:
@@ -54,7 +52,7 @@ def analyze_file():
         output_box.insert(tk.END, "\n".join(sorted_pkgs))
         output_box.insert(tk.END, f"\n\n推荐 pip 安装命令：\n{install_cmd}\n")
 
-        # ✅ 如果选择的是保存为文件
+        # 如果选择的是保存为文件
         if mode_var.get() == "save_file":
             filename = os.path.basename(file_path)
             filename_without_ext = os.path.splitext(filename)[0]
